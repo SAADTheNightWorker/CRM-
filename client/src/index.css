@@ -1,0 +1,870 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  min-height: 100vh;
+}
+
+/* * {
+   box-border list-none p-0 m-0 scroll-smooth;
+}
+
+body {
+   bg-dark-1 text-white min-h-screen font-inter;
+} */
+
+/* Light theme */
+.light {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+/* Dark theme */
+.dark {
+  background-color: #000000eb;
+  color: #f3f4f6;
+}
+
+.dark .sidebar {
+  background-color: #131313f3;
+  color: #f3f4f6;
+}
+
+.spotlight-bg {
+  position: relative;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.light .spotlight-grid {
+  border-right: 1px solid #cccccc;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+}
+
+.dark .spotlight-grid {
+  background-color: #080808;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+.spotlight-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spotlight-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark .ant-table-column-sorter,
+.dark .ant-table-thead > tr > th {
+  background-color: rgba(255, 252, 252, 0.748) !important;
+  /* background-color: #041643 !important; */
+  color: black !important;
+  font-size: 11px !important;
+
+  border-bottom: 1px solid #e2e6eb;
+}
+
+/* --- Fancy Card --- */
+.fancy-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 7, 7, 0.486),
+    rgba(109, 109, 109, 0.404)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(59, 58, 58, 0.06);
+}
+
+/* subtle grid texture */
+.fancy-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: linear-gradient(rgba(12, 12, 12, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(120% 90% at 50% 35%, #000 55%, transparent 100%);
+}
+
+/* animated spotlight (mouse position via CSS vars) */
+.fancy-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  background: radial-gradient(
+    650px circle at var(--mx, 50%) var(--my, 30%),
+    rgba(123, 123, 124, 0.22),
+    rgba(44, 43, 43, 0.08) 28%,
+    rgba(0, 0, 0, 0.75) 60%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.fancy-card:hover::before {
+  opacity: 1;
+}
+
+/* glowing border on hover */
+.fancy-border {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 24px;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  background: radial-gradient(
+    800px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(38, 38, 38, 0.448),
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.675) 60%
+  );
+  mask:
+    linear-gradient(#000, #000) content-box,
+    linear-gradient(#000, #000);
+  -webkit-mask:
+    linear-gradient(#000, #000) content-box,
+    linear-gradient(#000, #000);
+  padding: 1px;
+}
+
+.fancy-card:hover .fancy-border {
+  opacity: 1;
+}
+
+/* shiny sweep */
+.fancy-sheen {
+  position: absolute;
+  inset: -40%;
+  transform: rotate(20deg) translateX(-60%);
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+.fancy-card:hover .fancy-sheen {
+  opacity: 1;
+  animation: sheen 900ms ease forwards;
+}
+
+@keyframes sheen {
+  to {
+    transform: rotate(20deg) translateX(60%);
+  }
+}
+
+.lighte {
+  background-image: url("/images/1.png");
+  background-repeat: no-repeat;
+  /* background-color: #041643;   */
+
+  background-size: contain;
+}
+.darke {
+  background-image: url("/images/1.png");
+  background-repeat: no-repeat;
+  background-color: #041643;
+
+  background-size: contain;
+}
+
+/* Thick scrollbar utility */
+.thick-scrollbar ::-webkit-scrollbar {
+  height: 14px;
+  width: 14px;
+}
+
+.thick-scrollbar ::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 999px;
+}
+
+.thick-scrollbar ::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 999px;
+  border: 3px solid #e5e7eb;
+}
+
+.thick-scrollbar ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Firefox */
+.thick-scrollbar {
+  scrollbar-width: auto;
+  scrollbar-color: #9ca3af #e5e7eb;
+}
+
+/* #root > div > div > div > div > div > div > div > div.min-h-\[100vh\].relative > div > div.mt-16.bg-white.w-full.overflow-scroll > div > div > div > div > div > div > table > tbody > tr:nth-child(*) > td.ant-table-cell.ant-table-cell-fix-right.ant-table-cell-fix-right-first {
+  background-color: #041643;
+} */
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.min-h-\[100vh\].relative
+  > div
+  > div.mt-16.bg-white.w-full.overflow-scroll
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > table
+  > tbody
+  > tr
+  > td.ant-table-cell.ant-table-cell-fix-right {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@media screen and (max-width: 1287px) {
+  /* Your styles here */
+  .home {
+    background-size: cover;
+  }
+  .login {
+    background-size: cover;
+  }
+  body {
+    background-size: cover;
+    overflow-y: scroll;
+  }
+}
+/* =================================== Custom styles for pagination =================================*/
+.ant-table-tbody > .ant-table-measure-row > td {
+  /* display: none; */
+  padding: 0 !important;
+}
+
+/* apply bg color on header */
+.ant-table-column-sorter,
+.ant-table-thead > tr > th {
+  background-color: black !important;
+  /* background-color: #041643 !important; */
+  color: white !important;
+  font-size: 11px !important;
+
+  border-bottom: 1px solid #e2e6eb;
+}
+/* remove column seprator lin on header */
+/* .ant-table-thead > tr > th::before {
+  width: 0 !important;
+} */
+
+.ant-pagination-item-active {
+  background-color: black !important;
+  border-color: black !important;
+  /* background-color: #041643 !important; */
+  /* border-color: #041643 !important; */
+  font-size: 11px !important;
+}
+.ant-pagination-disabled,
+.ant-pagination-prev,
+.ant-pagination-next,
+.ant-pagination-item,
+.ant-pagination-jump-next,
+.ant-pagination-jump-prev {
+  border: 1px solid #bdbdbd !important;
+  color: #64748b !important;
+  font-size: 11px !important;
+  font-family: inter !important;
+}
+.ant-pagination-prev > button,
+.ant-pagination-next > button {
+  color: #272727 !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+}
+.ant-pagination-disabled > button {
+  font-size: 10px !important;
+}
+
+.ant-pagination-disabled {
+  background-color: #e2e6eb;
+}
+.ant-pagination-item-active a {
+  color: white !important;
+}
+
+/* select styling */
+.pagination-select > div > span {
+  color: black;
+  font-size: 12px;
+  font-family: inter !important;
+  font-weight: 700 !important;
+}
+.pagination-select > .ant-select-arrow {
+  color: black;
+  font-size: 10px;
+  font-weight: 900 !important;
+}
+
+.ant-notification-topRight.ant-notification-stack
+  > .ant-notification-notice-wrapper {
+  top: 66px !important;
+  right: -8px !important;
+}
+.ant-notification-notice {
+  padding: 14px 12px !important;
+  width: 480px !important;
+}
+.ant-notification-notice-icon-success.anticon {
+  color: #2b9744 !important;
+}
+.ant-notification-notice-icon {
+  top: 21px !important;
+}
+
+.ant-notification-notice-message {
+  margin-bottom: 0 !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+.ant-notification-notice-description {
+  font-size: 13px !important;
+}
+.ant-notification-notice-close {
+  top: 23px !important;
+  background: #e9e9e9;
+  color: #888888 !important;
+  font-size: 10px !important;
+  border-radius: 15px !important;
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f3f4f6; /* Tailwind gray-200 */
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #94a2ae; /* Tailwind gray-500 */
+    border-radius: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #4b5563; /* Tailwind gray-600 */
+  }
+}
+@layer base {
+  * {
+    @apply custom-scrollbar;
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f3f4f6; /* Tailwind gray-200 */
+  }
+}
+
+/* floating  */
+.floating-input {
+  position: relative;
+}
+
+.floating-input-active label,
+.floating-input label {
+  position: absolute;
+  top: 22px;
+  left: 10px;
+  transform: translateY(-50%);
+  background: transparent;
+  transition: 0.3s;
+  padding: 0 5px;
+  color: #64748b;
+  pointer-events: none;
+  font-size: 14px;
+}
+
+/* for input */
+.floating-input input:focus + label,
+.floating-input input:not(:placeholder-shown) + label,
+/* for select */
+.floating-input .ant-select-focused + label,
+.floating-input-active label,
+/* for date */
+.floating-input .ant-picker-focused + label
+/* .floating-input .ant-picker:not(:placeholder-shown) + label */ {
+  top: 13px;
+  left: 5px;
+  background: transparent;
+  color: #64748b;
+  font-size: 12px;
+  z-index: 1;
+}
+
+/* for select */
+.floating-input-active > div > div > .ant-select-selection-item,
+.floating-input > div > div > .ant-select-selection-item ,
+/* for input */
+.floating-input-active > div > div > input,
+/* .floating-input > div > div > span > .ant-select-selection-search-input, */
+.ant-input {
+  font-weight: 700 !important;
+}
+.ant-form-item {
+  margin-bottom: 5px !important;
+}
+/* for input */
+.floating-input input {
+  padding: 25px 10px 10px 9px;
+}
+/* for select */
+.floating-input-active > div > div > .ant-select-selection-item,
+.floating-input > div > div > .ant-select-selection-item {
+  top: 8px;
+  left: -1px;
+}
+/* for date */
+.floating-input > div > div > input,
+.floating-input-active > div > div > input {
+  top: 9px;
+  left: -1px;
+  font-size: 13px !important;
+}
+
+/* for input section in antd select*/
+.floating-input > div > div > span > .ant-select-selection-search-input {
+  padding-top: 12px !important;
+}
+.ant-select-selection-placeholder {
+  color: #64748b !important;
+}
+
+/* remove fileds symbol if value is filter (only for filter section) */
+.hide-field-symbol .ant-picker-clear {
+  display: none;
+}
+.hide-field-symbol .ant-picker-suffix {
+  display: none;
+}
+.hide-field-symbol .ant-select-arrow {
+  display: none;
+}
+
+/* .selected-row .ant-table-cell {
+  color: white !important;
+} */
+
+.ant-upload-list.ant-upload-list-text {
+  display: none !important;
+}
+
+/* NEW ///////////// NEW */
+/* small devices (laptops/desktops, 992px and below) */
+@media only screen and (max-width: 992px) {
+  .ant-table-wrapper tr.ant-table-expanded-row > td {
+    padding-left: 22px;
+    padding-right: 15px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
+  .ant-table-thead > tr > th {
+    padding-top: 12px !important;
+    padding-bottom: 11px !important;
+  }
+}
+/* 
+:where(.css-dev-only-do-not-override-1htoz2s).ant-input-outlined {
+  background-color: black !important;
+  color: white !important;
+
+} */
+
+/* Chart Css */
+/* Line */
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.MuiBox-root.css-t3xolk
+  > div.MuiBox-root.css-11dfn0q
+  > main
+  > div.MuiContainer-root.MuiContainer-maxWidthLg.min-w-full.css-8dyk8f-MuiContainer-root
+  > div
+  > div.MuiBox-root.css-k0sogd
+  > div
+  > div
+  > div.flex.flex-wrap.gap-8.justify-center.items-center.mt-10
+  > div:nth-child(2)
+  > div {
+  overflow-x: scroll;
+  scrollbar-width: 1px;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.MuiBox-root.css-t3xolk
+  > div.MuiBox-root.css-11dfn0q
+  > main
+  > div.MuiContainer-root.MuiContainer-maxWidthLg.min-w-full.css-8dyk8f-MuiContainer-root
+  > div
+  > div.MuiBox-root.css-k0sogd
+  > div
+  > div
+  > div.flex.flex-wrap.gap-8.justify-center.items-center.mt-10
+  > div:nth-child(2)
+  > div::-webkit-scrollbar {
+  background: transparent;
+  height: 1px;
+  overflow-x: scroll;
+  scrollbar-width: thin;
+}
+
+/* Target the specific div */
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.MuiBox-root.css-t3xolk
+  > div.MuiBox-root.css-11dfn0q
+  > main
+  > div.MuiContainer-root.MuiContainer-maxWidthLg.min-w-full.css-8dyk8f-MuiContainer-root
+  > div
+  > div.MuiBox-root.css-k0sogd
+  > div
+  > div
+  > div.flex.flex-wrap.gap-8.justify-center.items-center.mt-10
+  > div:nth-child(1)
+  > div {
+  overflow-x: scroll;
+  scrollbar-width: none; /* Correct: none, not 1px */
+}
+
+/* For Webkit Browsers (Chrome, Safari, Edge) */
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.MuiBox-root.css-t3xolk
+  > div.MuiBox-root.css-11dfn0q
+  > main
+  > div.MuiContainer-root.MuiContainer-maxWidthLg.min-w-full.css-8dyk8f-MuiContainer-root
+  > div
+  > div.MuiBox-root.css-k0sogd
+  > div
+  > div
+  > div.flex.flex-wrap.gap-8.justify-center.items-center.mt-10
+  > div:nth-child(1)
+  > div::-webkit-scrollbar {
+  display: none; /* Correct: hide it completely */
+}
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.MuiBox-root.css-t3xolk
+  > div.MuiBox-root.css-11dfn0q
+  > main
+  > div.MuiContainer-root.MuiContainer-maxWidthLg.min-w-full.css-8dyk8f-MuiContainer-root
+  > div
+  > div.MuiBox-root.css-k0sogd
+  > div
+  > div
+  > div.flex.flex-wrap.gap-8.justify-center.items-center.mt-10
+  > div:nth-child(3)
+  > div {
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.MuiBox-root.css-t3xolk
+  > div.MuiBox-root.css-11dfn0q
+  > main
+  > div.MuiContainer-root.MuiContainer-maxWidthLg.min-w-full.css-8dyk8f-MuiContainer-root
+  > div
+  > div.MuiBox-root.css-k0sogd
+  > div
+  > div
+  > div.flex.flex-wrap.gap-8.justify-center.items-center.mt-10
+  > div:nth-child(4)
+  > div {
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+
+/* tabel classes */
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.min-h-\[100vh\].relative
+  > div
+  > div.mt-16.bg-white.w-full.overflow-scroll
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div {
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.min-h-\[100vh\].relative
+  > div
+  > div.mt-16.bg-white.w-full.overflow-scroll {
+  overflow: hidden;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.min-h-\[100vh\].p-4
+  > div.mt-16.bg-white.w-full.overflow-scroll
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div {
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+
+#root
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div
+  > div.min-h-\[100vh\].p-4
+  > div.mt-16.bg-white.w-full.overflow-scroll {
+  overflow: hidden;
+}
+
+#\:r17\: {
+  display: none;
+}
+/* 
+#\:r3\: {
+  color: gray !important;
+} */
+
+/* Top Menu Classes */
+
+body
+  > div.MuiPopover-root.MuiMenu-root.mt-4.\!rounded-full.MuiModal-root.css-pa188r-MuiModal-root-MuiPopover-root-MuiMenu-root
+  > div.MuiBackdrop-root.MuiBackdrop-invisible.MuiModal-backdrop.css-vl6bb4-MuiBackdrop-root-MuiModal-backdrop {
+  border-radius: 10px;
+}
+
+/* Flip Clock CSS */
+
+.clockWrap {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: transparent;
+}
+
+.flipBlock {
+  display: flex;
+  gap: 22px;
+  position: relative;
+}
+
+.flipDigit {
+  width: 180px;
+  height: 260px;
+  border-radius: 44px;
+  position: relative;
+  overflow: hidden;
+
+  background: radial-gradient(
+    120% 120% at 30% 20%,
+    #2a2a2a 0%,
+    #0b0b0b 60%,
+    #050505 100%
+  );
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.65),
+    inset 0 2px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -10px 25px rgba(0, 0, 0, 0.55);
+}
+
+.splitLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 10px;
+  transform: translateY(-50%);
+  background: linear-gradient(#111, #000);
+  box-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.08),
+    0 1px 0 rgba(0, 0, 0, 0.9);
+  opacity: 0.9;
+  z-index: 2;
+}
+
+.shine {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 18px;
+  height: 40%;
+  border-radius: 30px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  z-index: 1;
+}
+
+.digitText {
+  position: absolute;
+  margin-top: -30px;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial;
+  font-weight: 800;
+  font-size: 120px;
+  letter-spacing: -8px;
+  color: #cfcfcf;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.ampm {
+  position: absolute;
+  left: 26px;
+  bottom: 26px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  font-size: 54px;
+  color: #cfcfcf;
+  opacity: 0.9;
+  z-index: 3;
+}
+
+/* Dark Mode Code */
+
+.textTitle {
+  color: rgb(107, 114, 128);
+}
+.dark .textTitle {
+  color: rgb(255, 255, 255) !important;
+}
+.topNavBg {
+  background: rgb(255, 255, 255);
+}
+.dark .topNavBg {
+  background: rgb(14, 14, 14) !important;
+}

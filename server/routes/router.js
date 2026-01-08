@@ -1,0 +1,33 @@
+const express = require("express");
+const clientRouter = require("./clientRouter");
+const agentRouter = require("./agentRouter");
+const brokerRouter = require("./brokerRouter");
+const companyRouter = require("./companyRouter");
+const vendorRouter = require("./vendorRouter");
+const categoryRouter = require("./categoryRouter");
+const paymentRouter = require("./paymentRouter");
+const policyRecordRouter = require("./policyrecordRouter");
+const revenueRecordRouter = require("./revenueRecord");
+const expenceRecordRouter = require("./expenceRecordRouter");
+const fleetManagement = require("./FleetManagementRouter");
+const userRouter = require("./userRouter");
+const policyChartRouter = require("./policyChartRoute");
+const notifcationRouter = require("./notifcationRouter");
+const router = express.Router();
+
+router.use("/client", clientRouter);
+router.use("/agent", agentRouter);
+router.use("/broker", brokerRouter);
+router.use("/company", companyRouter);
+router.use("/vendor", vendorRouter);
+router.use("/category", categoryRouter);
+router.use("/payment", paymentRouter);
+router.use("/policyRecord", policyRecordRouter);
+router.use("/revenueRecord", revenueRecordRouter);
+router.use("/expenceRecord", expenceRecordRouter);
+router.use("/fleetManagement", fleetManagement);
+router.use("/policyData", policyChartRouter);
+router.use("/notifcation", notifcationRouter);
+router.use("/user", userRouter);
+
+module.exports = router;
